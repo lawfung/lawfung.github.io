@@ -14,7 +14,7 @@
 <meta property="og:description" content="本篇文章適用於那些常常寫出無法AC的程式碼而一直求助的菜雞  前言Q : 為甚麼要學怎麼問問題，不是就把遇到的困難說出來就好嗎？A : 確實應該把遇到的困難說出來就好，但是你以為你遇到的困難可能不是你真正遇到的困難，這是因為做競賽題目是一個較為龐大的流程，菜雞容易跳過前面的步驟，直接進行後面的步驟，而問出後面的問題，這是非常錯誤的行為。 Q : 那經過與被詢問者的對話後，慢慢的總是會找出真正的問">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-31T13:24:11.000Z">
-<meta property="article:modified_time" content="2021-07-31T15:01:41.401Z">
+<meta property="article:modified_time" content="2021-07-31T15:09:38.450Z">
 <meta property="article:author" content="lawfung">
 <meta name="twitter:card" content="summary">
   
@@ -113,14 +113,14 @@
 <p>雖然乍看之下很是廢話，但是不好好的區分三者，就無法找出問題的來源，也就無法解決問題，因此以下我們詳細描述這三個部分，並且列舉一些會遇到的問題。</p>
 <h3 id="看懂題目"><a href="#看懂題目" class="headerlink" title="看懂題目"></a>看懂題目</h3><p>詳細的來說，看懂題目包含下列</p>
 <ol>
-<li><strong>看懂題目敘述</strong><br>知道題目敘述中每個字詞的含意（鮮少時可以判定某些字詞不重要而忽略）</li>
+<li><strong>看懂題目敘述</strong><br>知道題目敘述中每個字詞的含意（鮮少時候可以判定某些字詞不重要而忽略）</li>
 <li><strong>看懂範例測資</strong><br>看著範例測資的輸入，想出一個你覺得是對的輸出，跟真正的輸出有對上嗎？</li>
 </ol>
 <p>如果你在第一個步驟遇到困難，你要問的問題模式會是<strong>「我看不懂題目敘述，其中詞彙 XXX 我不知道是什麼意思 / 其中句子 XXX 我不知道是什麼意思」</strong><br>如果你在第二個步驟遇到困難，你要做的事情應該是<strong>回去重看題目敘述</strong>，你真的確認你沒有看錯之後，才能問這個步驟的問題，而你要問的問題模式會是<strong>「我看不懂範例測資，其中第 K 筆，根據題目說的 XXX ，因此 … 。所以我認為答案是 x ，而不是範例輸出給的 y 」</strong></p>
 <h3 id="想出做法"><a href="#想出做法" class="headerlink" title="想出做法"></a>想出做法</h3><p>想出做法就是想出做法，而其中做法需要包含下列條件。</p>
 <ul>
 <li>你證明（覺得）它是對的</li>
-<li>你證明（覺得）它是的複雜度是好的</li>
+<li>你證明（覺得）它的複雜度是好的</li>
 <li>根據你的想的這個做法，在你想像中執行，可以通過所有範例測資</li>
 </ul>
 <p>如果你在這個部分遇到困難，你要問的問題會是「我想不出做法」。<br>但是大多數的時候，你可能會有一些想法，但是卻無法滿足以上的條件，那麼你要問的問題模式應該要是<strong>「我想不出做法，而我的想法無法滿足 XXX 條件，但是我的想法可以滿足 OOO 條件，我的想法是…」</strong></p>
@@ -129,7 +129,7 @@
 <h5 id="問題發生在範例測資"><a href="#問題發生在範例測資" class="headerlink" title="問題發生在範例測資"></a>問題發生在範例測資</h5><p>先講結論，<strong>如果你在這個步驟遇到障礙，你沒有資格問問題</strong><br>程式是你寫的，每個指令都是你下的，因此你應該做的事情是，確認<strong>每個</strong>指令後，<strong>每個</strong>變數是不是符合<strong>你想的做法</strong>。<br>找出第一個產生不符合你想的做法的變數的指令，你就找到錯誤了。</p>
 <p>如果你發現每個指令每個指令後的每個變數都符合你想的做法，那<strong>你想的做法就是錯的</strong>，而這是<strong>想出做法</strong>的環節就應該遇到的困難，你應該要退回去那個環節，當作你根本還沒寫程式。</p>
 <h5 id="問題發生在上傳後"><a href="#問題發生在上傳後" class="headerlink" title="問題發生在上傳後"></a>問題發生在上傳後</h5><p>上傳之後會出現許多結果，一般常出現的無非就是<strong>TLE, RE, WA</strong></p>
-<p>一般來說， RE 是最簡單可以解決的問題，幾種可能檢查一下就可以了，詳細的不在此列出，<strong>理論上你應該鮮少由於 RE 而求助</strong>。<br>如果遇到 TLE ，表示你可能實作上有些紕漏，也是幾種可能的部分（通常是迴圈或是遞迴函數）檢查一下就可以了。但是對於菜雞，更常有可能是你根本<strong>做法是錯的</strong>，肇因於<strong>沒有證明</strong>或是<strong>證明錯誤</strong>，其中又以<strong>沒有證明</strong>為最常見問題。此時你應該退回想出做法的環節，嘗試證明複雜度，當作你根本沒有上傳過。<br><strong>理論上你應該鮮少由於 TLE 而求助</strong>，你該求助的是<strong>「我想不出複雜度是好的做法」</strong>或是<strong>「我不知道我的做法的複雜度是不是好的，但是我覺得是好的，可以幫我確認一下嗎」</strong>，而這些是前一個步驟的問題。</p>
+<p>一般來說， RE 是最簡單可以解決的問題，幾種可能檢查一下就可以了，詳細的不在此列出，<strong>理論上你應該鮮少由於 RE 而求助</strong>。<br>如果遇到 TLE ，表示你可能實作上有些紕漏，也是幾種可能的部分（通常是迴圈或是遞迴函數）檢查一下就可以了。但是對於菜雞，更常有可能是你根本<strong>複雜度是壞的</strong>，肇因於<strong>沒有證明</strong>或是<strong>證明錯誤</strong>，其中又以<strong>沒有證明</strong>為最常見問題。此時你應該退回想出做法的環節，嘗試證明複雜度，當作你根本沒有上傳過。<br><strong>理論上你應該鮮少由於 TLE 而求助</strong>，你該求助的是<strong>「我想不出複雜度是好的做法」</strong>或是<strong>「我不知道我的做法的複雜度是不是好的，但是我覺得是好的，可以幫我確認一下嗎」</strong>，而這些是前一個步驟的問題。</p>
 <p>那如果遇到 WA 怎麼辦。如果你只會在遇到 WA 的時候才會去問問題，那麼我想你已經不是菜雞了，也許你該看看別的文章。</p>
 <h2 id="打個小總結"><a href="#打個小總結" class="headerlink" title="打個小總結"></a>打個小總結</h2><p>以上把步驟詳細的列出來了，而有一點非常重要的是，<strong>以上的步驟是有順序性的</strong><br>比如說</p>
 <ol>
@@ -141,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lawfung.github.io/2021/07/31/%E7%B5%A6%E7%AB%B6%E7%A8%8B%E8%8F%9C%E9%9B%9E%E7%9A%84%E5%95%8F%E5%95%8F%E9%A1%8C%E6%95%99%E5%AD%B8/" data-id="ckrrwl6yd00007lush1uh7xbe" data-title="給競程菜雞的問問題教學" class="article-share-link">Share</a>
+      <a data-url="http://lawfung.github.io/2021/07/31/%E7%B5%A6%E7%AB%B6%E7%A8%8B%E8%8F%9C%E9%9B%9E%E7%9A%84%E5%95%8F%E5%95%8F%E9%A1%8C%E6%95%99%E5%AD%B8/" data-id="ckrrwwfui00018yusg16chmog" data-title="給競程菜雞的問問題教學" class="article-share-link">Share</a>
       
       
       
