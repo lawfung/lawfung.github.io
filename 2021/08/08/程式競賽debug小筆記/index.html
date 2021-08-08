@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>程式競賽debug小筆記 | lawfung&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Bug 可以出現在任何地方，因此沒有泛用的 debug 流程，本文僅僅提出一些很粗淺的技巧。 常見的坑 檢查題目數字範圍 你陣列開的夠大嗎 你的程式可以處理極端狀況嗎 (極大或是極小)   你的運算過程中會 overflow 嗎 你的運算過程中會發生無限迴圈（遞迴）嗎  你寫的演算法真的是對的嗎  一些技巧assert這是一個放在&lt;cassert&gt;裡面的函數。簡單來說，在 assert">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程式競賽debug小筆記">
+<meta property="og:url" content="http://lawfung.github.io/2021/08/08/%E7%A8%8B%E5%BC%8F%E7%AB%B6%E8%B3%BDdebug%E5%B0%8F%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="lawfung&#39;s blog">
+<meta property="og:description" content="Bug 可以出現在任何地方，因此沒有泛用的 debug 流程，本文僅僅提出一些很粗淺的技巧。 常見的坑 檢查題目數字範圍 你陣列開的夠大嗎 你的程式可以處理極端狀況嗎 (極大或是極小)   你的運算過程中會 overflow 嗎 你的運算過程中會發生無限迴圈（遞迴）嗎  你寫的演算法真的是對的嗎  一些技巧assert這是一個放在&lt;cassert&gt;裡面的函數。簡單來說，在 assert">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-08-07T20:32:43.000Z">
+<meta property="article:modified_time" content="2021-08-08T06:35:13.160Z">
+<meta property="article:author" content="lawfung">
+<meta property="article:tag" content="competitive programming">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lawfung's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lawfung&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://lawfung.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-程式競賽debug小筆記" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/08/%E7%A8%8B%E5%BC%8F%E7%AB%B6%E8%B3%BDdebug%E5%B0%8F%E7%AD%86%E8%A8%98/" class="article-date">
+  <time class="dt-published" datetime="2021-08-07T20:32:43.000Z" itemprop="datePublished">2021-08-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      程式競賽debug小筆記
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Bug 可以出現在任何地方，因此沒有泛用的 debug 流程，本文僅僅提出一些很粗淺的技巧。</p>
+<h2 id="常見的坑"><a href="#常見的坑" class="headerlink" title="常見的坑"></a>常見的坑</h2><ul>
+<li>檢查題目數字範圍<ul>
+<li>你陣列開的夠大嗎</li>
+<li>你的程式可以處理極端狀況嗎 (極大或是極小)</li>
+</ul>
+</li>
+<li>你的運算過程中會 overflow 嗎</li>
+<li>你的運算過程中會發生無限迴圈（遞迴）嗎 </li>
+<li><strong>你寫的演算法真的是對的嗎</strong></li>
+</ul>
+<h2 id="一些技巧"><a href="#一些技巧" class="headerlink" title="一些技巧"></a>一些技巧</h2><h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/error/assert">assert</a></h3><p>這是一個放在<code>&lt;cassert&gt;</code>裡面的函數。簡單來說，在 assert 裡面放一個你覺得是 True 的表達式，如果它真的是 True ，那就沒事，如果其實不是，那會產生 RE 。<br>比如說</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> a = <span class="number">0.1</span>;</span><br><span class="line"><span class="keyword">float</span> b = <span class="number">0.2</span>;</span><br><span class="line"><span class="built_in">assert</span>(a + b == <span class="number">0.3</span>);</span><br></pre></td></tr></table></figure>
+<p>上述的程式就會因為浮點數誤差而產生 RE 。</p>
+<h3 id="黃色小鴨除錯法"><a href="#黃色小鴨除錯法" class="headerlink" title="黃色小鴨除錯法"></a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B0%8F%E9%BB%84%E9%B8%AD%E8%B0%83%E8%AF%95%E6%B3%95">黃色小鴨除錯法</a></h3><p>不開玩笑，請你真的<strong>講出來</strong>。</p>
+<h3 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h3><p>相較於以上兩種做法，開 Warning 其實是非常經濟實惠的作法，你要多做的事情就只有在編譯時多增加一些參數。<br>Warning 的意義在於，當你編譯時，有些寫法可以通過編譯器，但是實際上你卻不想要這樣寫，也就是說，一旦你這樣寫，其實你是寫錯的，但是編譯器卻沒有辦法偵測出來。比如說，宣告一個和全域變數同名的區域變數，你應該不會想要這樣做，但是有時候不小心還是會寫成這樣。但是，如果你開了 Warning ，這類實際上經常是寫錯的寫法就可以在編譯時跳出警告。</p>
+<p>以我自己為例，我常用的編譯參數如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -std=c++14 -Wall -Wextra -Wshadow -Wconversion</span><br></pre></td></tr></table></figure>
+
+<p>如果你編譯以下程式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++ i) &#123;</span><br><span class="line">		<span class="keyword">int</span> a = i;</span><br><span class="line">		cout &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用以上的編譯參數編譯時，就會跳出以下訊息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A.cpp: In function ‘int main()’:</span><br><span class="line">A.cpp:6:7: warning: declaration of ‘a’ shadows a previous local [-Wshadow]</span><br><span class="line">    6 |   int a = i;</span><br><span class="line">      |       ^</span><br><span class="line">A.cpp:4:6: note: shadowed declaration is here</span><br><span class="line">    4 |  int a = 1;</span><br><span class="line">      |      ^</span><br></pre></td></tr></table></figure>
+
+<p>這就是因為迴圈外本來就宣告了變數<code>a</code>，迴圈內又宣告了一個變數<code>a</code>，這觸犯了<code>-Wshadow</code>，因此會出現警告。</p>
+<p>Warning 的種類有很多，以上的四種中</p>
+<ul>
+<li>-Wall</li>
+<li>-Wextra</li>
+<li>-Wshadow</li>
+<li>-Wconversion</li>
+</ul>
+<p>前兩種其實是類似大禮包的東西，會一次開一大堆的 Warning 。<br>後兩者則各自有自己的功能，<code>-Wshadow</code>大概就是檢查同樣的名字重複宣告，而<code>-Wconversion</code>大概就是檢查有沒有變數被編譯器強制轉型，有興趣的人可以自行查閱。<br>如果沒有甚麼特別需求的人，照抄我這四種 Warning 應該就夠用了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://lawfung.github.io/2021/08/08/%E7%A8%8B%E5%BC%8F%E7%AB%B6%E8%B3%BDdebug%E5%B0%8F%E7%AD%86%E8%A8%98/" data-id="cks2u7zpx0001adus8udq6pqc" data-title="程式競賽debug小筆記" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/competitive-programming/" rel="tag">competitive programming</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/07/31/%E7%B5%A6%E7%AB%B6%E7%A8%8B%E8%8F%9C%E9%9B%9E%E7%9A%84%E5%95%8F%E5%95%8F%E9%A1%8C%E6%95%99%E5%AD%B8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">給競程菜雞的問問題教學</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/competitive-programming/" rel="tag">competitive programming</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/08/%E7%A8%8B%E5%BC%8F%E7%AB%B6%E8%B3%BDdebug%E5%B0%8F%E7%AD%86%E8%A8%98/">程式競賽debug小筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/31/%E7%B5%A6%E7%AB%B6%E7%A8%8B%E8%8F%9C%E9%9B%9E%E7%9A%84%E5%95%8F%E5%95%8F%E9%A1%8C%E6%95%99%E5%AD%B8/">給競程菜雞的問問題教學</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/17/Github-pages-%E5%BB%BA%E7%AB%8B%E7%AD%86%E8%A8%98/">Github pages 建立筆記</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 lawfung<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
